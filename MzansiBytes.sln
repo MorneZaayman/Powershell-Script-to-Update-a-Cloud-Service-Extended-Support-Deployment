@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "MzansiBytes", "MzansiBytes\MzansiBytes.ccproj", "{EDEB60F1-31DD-4481-B82C-3F57C7197FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRole1", "WebRole1\WebRole1.csproj", "{C328111F-937E-42C5-B744-27B2315DEC8B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDEB60F1-31DD-4481-B82C-3F57C7197FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDEB60F1-31DD-4481-B82C-3F57C7197FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDEB60F1-31DD-4481-B82C-3F57C7197FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDEB60F1-31DD-4481-B82C-3F57C7197FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C328111F-937E-42C5-B744-27B2315DEC8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C328111F-937E-42C5-B744-27B2315DEC8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C328111F-937E-42C5-B744-27B2315DEC8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C328111F-937E-42C5-B744-27B2315DEC8B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {540327BF-4E63-4A09-9536-CB3506B54822}
+	EndGlobalSection
+EndGlobal

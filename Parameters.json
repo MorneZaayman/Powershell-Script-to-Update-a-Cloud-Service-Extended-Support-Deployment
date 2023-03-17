@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "cloudServiceName": {
+      "value": "MzansiBytes-1"
+    },
+    "configurationSasUri": {
+      "value": "https://mzansibytes.blob.core.windows.net/temp/CloudPackage/ServiceConfiguration.cscfg?sv=2021-10-04&se=2023-03-16T18%3A49%3A48Z&sr=b&sp=rwd&sig=9zHm68%2FA1QLrm63aW9AQQdyfz8naoa6C3DK8DRtWvrk%3D"
+    },
+    "packageSasUri": {
+      "value": "https://mzansibytes.blob.core.windows.net/temp/CloudPackage/MzansiBytes.cspkg?sv=2021-10-04&se=2023-03-16T18%3A50%3A10Z&sr=b&sp=rwd&sig=pcn%2BSj%2B2GO3PhHlxvtymn6zj0jL0djfvvI6tMgX%2BBiw%3D"
+    },
+    "publicIPName": {
+      "value": "mzansibytes-staging"
+    },
+    "location": {
+      "value": "southafricanorth"
+    },
+    "startCloudService": {
+      "value": true
+    },
+    "swappableCloudService": {
+      "value": "/subscriptions/f476dc39-9d5f-45ae-82dc-5bb585338500/resourceGroups/MZANSIBYTES/providers/Microsoft.Compute/cloudServices/MzansiBytes-2"
+    },
+    "vnetName": {
+      "value": "mzansibytes"
+    },
+    "vnetId": {
+      "value": "/subscriptions/e7677071-26f6-4aa8-967f-8405db4a6718/resourceGroups/mzansibytes/providers/Microsoft.Network/virtualNetworks/mzansibytes"
+    }
+  }
+}

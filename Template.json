@@ -1,0 +1,121 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "cloudServiceName": {
+            "type": "string"
+        },
+        "configurationSasUri": {
+            "type": "securestring"
+        },
+        "packageSasUri": {
+            "type": "securestring"
+        },
+        "startCloudService": {
+            "type": "bool"
+        },
+        "publicIPName": {
+            "type": "string"
+        },
+        "vnetName": {
+            "type": "string"
+        },
+        "vnetId": {
+            "type": "string"
+        },
+        "swappableCloudService": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "resourcePrefix": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/')]",
+        "lbName": "[concat(parameters('cloudServiceName'), 'LB')]",
+        "lbFEName": "[concat(parameters('cloudServiceName'), 'LBFE')]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2022-04-04",
+            "type": "Microsoft.Compute/cloudServices",
+            "name": "[parameters('cloudServiceName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "packageUrl": "[parameters('packageSasUri')]",
+                "configurationUrl": "[parameters('configurationSasUri')]",
+                "startCloudService": "[parameters('startCloudService')]",
+                "upgradeMode": "Auto",
+                "roleProfile": {
+                    "roles": [
+                        {
+                            "name": "WebRole1",
+                            "sku": {
+                                "capacity": 1,
+                                "name": "Standard_D1_v2",
+                                "tier": "Standard"
+                            }
+                        }
+                    ]
+                },
+                "networkProfile": {
+                    "loadBalancerConfigurations": [
+                        {
+                            "id": "[concat(variables('resourcePrefix'), 'Microsoft.Network/loadBalancers/', variables('lbName'))]",
+                            "name": "[variables('lbName')]",
+                            "properties": {
+                                "frontendIPConfigurations": [
+                                    {
+                                        "name": "[variables('lbFEName')]",
+                                        "properties": {
+                                            "publicIPAddress": {
+                                                "id": "[concat(variables('resourcePrefix'), 'Microsoft.Network/publicIPAddresses/', parameters('publicIPName'))]"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "swappableCloudService": {
+                        "id": "[parameters('swappableCloudService')]"
+                    }
+                },
+                "osProfile": {
+                    "secrets": [
+                        {
+                            "sourceVault": {
+                                "id": "/subscriptions/f476dc39-9d5f-45ae-82dc-5bb585338500/resourceGroups/MzansiBytes/providers/Microsoft.KeyVault/vaults/MzansiBytes"
+                            },
+                            "vaultCertificates": [
+                                {
+                                    "certificateUrl": "https://mzansibytes.vault.azure.net/secrets/MzansiBytes/7c18c149ef8f489b84f86cab11bfb1c2"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "tags": {},
+            "dependsOn": [
+                "[concat('Microsoft.Network/publicIPAddresses/', parameters('publicIPName'))]"
+            ]
+        },
+        {
+            "apiVersion": "2019-02-01",
+            "type": "Microsoft.Network/publicIpAddresses",
+            "name": "[parameters('publicIPName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 10,
+                "publicIPAddressVersion": "IPv4",
+                "dnsSettings": null
+            },
+            "sku": {
+                "name": "Basic"
+            },
+            "tags": {}
+        }
+    ]
+}
